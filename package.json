@@ -1,0 +1,38 @@
+{
+  "name": "vue-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.4.0",
+    "element-plus": "^2.3.4",
+    "pinia": "^2.0.35",
+    "pinia-plugin-persistedstate": "^3.1.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@unocss/eslint-config": "^0.51.8",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "eslint": "^8.39.0",
+    "eslint-plugin-unocss": "^0.0.1-alpha.3",
+    "eslint-plugin-vue": "^9.11.0",
+    "sass": "^1.62.1",
+    "typescript": "^5.0.2",
+    "unocss": "^0.51.8",
+    "unplugin-auto-import": "^0.15.3",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.3.2",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vue-tsc": "^1.4.2"
+  }
+}
