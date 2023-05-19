@@ -10,6 +10,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
+import path from 'path'
+
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
@@ -41,13 +43,13 @@ export default defineConfig({
         open: true,
         // cors: true,
     
-    // 跨域代理配置
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://golf.zhenyujm.com/admin',
-    //     changeOrigin: true,
-    //     rewrite: path => path.replace(/^\/api/, ''),
-    //   },
-    // },
+        // 跨域代理配置
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8888/',
+                changeOrigin: true,
+                rewrite: path => path.replace(/^\/api/, ''),
+            },
+        },
     },
 })

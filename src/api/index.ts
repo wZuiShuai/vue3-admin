@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { ResultEnum } from '@/api/config/httpEnum'
 import { checkStatus } from '@/api/config/checkStatus'
-import { main } from '@/stort/index'
+import { main } from '@/stort/modules/main'
 import router from '@/routers'
 import type { ResultData } from '@/api/interface'
 
@@ -12,8 +12,6 @@ const config = {
     baseURL: import.meta.env.VITE_API_URL as string,
     // 设置超时时间（10s）
     timeout: ResultEnum.TIMEOUT as number,
-    // 跨域时候允许携带凭证
-    withCredentials: true,
 }
 
 class RequestHttp {
@@ -28,7 +26,7 @@ class RequestHttp {
                 const token: string = main().$state.token
                 return {
                     ...config,
-                    headers: { ...config.headers, Authorization: token },
+                    headers: { ...config.headers, 'x-token': token },
                 }
             },
             (error: AxiosError) => {

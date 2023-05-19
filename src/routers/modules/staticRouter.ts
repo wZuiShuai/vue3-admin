@@ -69,8 +69,8 @@ export const staticRouter: RouteRecordRaw[] = [
  * errorRouter(错误页面路由)
  */
 export const errorRouter = [
-    // {
-    //     path: '/:pathMatch(.*)*',
-    //     redirect: { name: 'NotFound' },
-    // },
+    {
+        path: '/:pathMatch(.*)*',
+        component: () => import('@/views/errorPages/notFound.vue'),
+    },
 ]

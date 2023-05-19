@@ -9,36 +9,27 @@ export interface Result {
 export interface ResultData<T = any> extends Result {
     data: T
 }
-export namespace Login {
-    export interface ReqLoginForm {
-        username: string
-        password: string
-    }
-    export interface ResLogin {
-        token: string
-    }
-}
 
-export interface ResPages {
-    data: {
-        role: {
-            menus: []
-        }
-    }
-}
+// export interface ResPages {
+//     data: {
+//         role: {
+//             menus: []
+//         }
+//     }
+// }
 
 
-export namespace Menu {
-    export interface MenuOptions {
-        path: string
-        name: string
-        component?: string | (() => Promise<any>)
-        meta: metaOptions
-        children?: MenuOptions[]
-    }
+// export namespace Menu {
+//     export interface MenuOptions {
+//         path: string
+//         name: string
+//         component?: string | (() => Promise<any>)
+//         meta: metaOptions
+//         children?: MenuOptions[]
+//     }
 
-    interface metaOptions {
-        icon: string
-        title: string
-    }
-}
+//     interface metaOptions {
+//         icon: string
+//         title: string
+//     }
+// }
