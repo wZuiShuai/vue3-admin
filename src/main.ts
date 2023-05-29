@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
-import './style/index.scss'
 import App from './App.vue'
 import router from '@/routers/index'
 import pinia from '@/stort'
 
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+import './styles/index.scss'
 import 'virtual:uno.css'
 const app = createApp(App)
 

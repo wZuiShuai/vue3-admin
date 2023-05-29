@@ -1,11 +1,11 @@
 <template>
-    <div class="bg-no-repeat full flex-center login bg-cover">
-        <div class="flex w96vw h94vh bg-white opacity-80 items-center justify-evenly">
+    <div class="login full flex-center bg-cover bg-no-repeat">
+        <div class="h94vh w96vw flex items-center justify-evenly bg-white opacity-80">
             <!-- 左边 form -->
-            <div class="bg-white w105 p10 rounded-10px drop-shadow-xl">
-                <div class="flex-center my7.5">
+            <div class="w105 rounded-10px bg-white p10 drop-shadow-xl">
+                <div class="my7.5 flex-center">
                     <img class="w14.5" src="@/assets/logo.svg" alt="logo">
-                    <p class="text-10 pl5 whitespace-nowrap">
+                    <p class="whitespace-nowrap pl5 text-10">
                         {{ title }}
                     </p>
                 </div>
@@ -51,18 +51,25 @@
                 </el-form>
             </div>
             <!-- 右边边 图片背景 -->
-            <div class="bg-no-repeat bg-cover rightBg w40% h60% hidden md:block" />
+            <div class="rightBg hidden h60% w40% bg-cover bg-no-repeat md:block" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts" name="Login">
 import { reactive, ref } from 'vue'
-import type { Login } from '@/api/modules/login'
 import { captchaApi } from '@/api/modules/system'
 import type { FormInstance, FormRules } from 'element-plus'
 
+import { loginApi } from '@/api/modules/login'
+import type { Login } from '@/api/modules/login'
+
+import { initDynamicRouter } from '@/routers/modules/dynamicRouter'
+
 import { main } from '@/stort/modules/main'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 const mainStore = main()
 
 
@@ -105,20 +112,23 @@ captcha()
 const loginForm = ref<FormInstance | null>(null)
 
 const cleanForm = () => {
-    formData.username = ''
-    formData.password = ''
-    isLoading.value = false
-
+    if (!loginForm.value) return
     loginForm.value?.resetFields()
 }
 
-const submitForm = () => {
+const submitForm = async () => {
     if (!loginForm.value) return
     loginForm.value.validate(async (valid) => {
         if (valid) {
             isLoading.value = true
             try {
-                await mainStore.LoginIn(formData)
+                const res = await loginApi(formData)
+                mainStore.token = res.data.token
+
+                // 2.添加动态路由
+                await initDynamicRouter()
+
+                router.push({ name: 'layout' })
             } catch (error) {
                 captcha()
             } finally {

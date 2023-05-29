@@ -6,63 +6,23 @@ import type { RouteRecordRaw } from 'vue-router'
 export const staticRouter: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: { name: 'login' },
+        redirect: import.meta.env.VITE_LOGIN_URL,
     },
     {
-        path: '/login',
+        path: import.meta.env.VITE_LOGIN_URL,
         name: 'login',
         component: () => import('@/views/login/index.vue'),
         meta: {
             title: '登录',
         },
     },
-    // {
-    //     path: '/',
-    //     name: 'layout',
-    //     component: () => import('@/layouts/index.vue'),
-    //     redirect: { name: 'home' },
-    //     children: [
-    //         {
-    //             path: 'home',
-    //             name: 'home',
-    //             component: () => import('@/views/home/index.vue'),
-    //             meta:{
-    //                 icon:'HomeFilled',
-    //                 title:'首页',
-    //             }
-    //         },
-    //         {
-    //             path: 'ho',
-    //             name: 'home222',
-    //             component: () => import('@/views/home/index.vue'),
-    //             meta:{
-    //                 icon:'EditPen',
-    //                 title:'首页123',
-    //             },
-    //             redirect: { name: 'home3333' },
-    //             children: [
-    //                 {
-    //                     path: 'h',
-    //                     name: 'home3333',
-    //                     component: () => import('@/views/home/index.vue'),
-    //                     meta:{
-    //                         icon:'HomeFilled',
-    //                         title:'首页22',
-    //                     }
-    //                 },
-    //                 {
-    //                     path: 'h44',
-    //                     name: 'home44444',
-    //                     component: () => import('@/views/home/index.vue'),
-    //                     meta:{
-    //                         icon:'HomeFilled',
-    //                         title:'首页2244',
-    //                     }
-    //                 },
-    //             ]
-    //         }
-    //     ],
-    // },
+    {
+        path: '/layout',
+        name: 'layout',
+        component: () => import('@/layout/index.vue'),
+        redirect: '/home/index',
+        children: [],
+    },
 ]
 
 /**
@@ -71,6 +31,6 @@ export const staticRouter: RouteRecordRaw[] = [
 export const errorRouter = [
     {
         path: '/:pathMatch(.*)*',
-        component: () => import('@/views/errorPages/notFound.vue'),
+        component: import('@/views/errorPages/notFound.vue'),
     },
 ]

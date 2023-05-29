@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+#app {
+    height: 100%;
+}
+
+ins,a {
+    text-decoration: none;
+}
+
+:root {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+
+/* breadcrumb-transform */
+.breadcrumb-enter-active {
+    transition: all 0.2s;
+  }
+  .breadcrumb-enter-from,
+  .breadcrumb-leave-active {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  /* fade-transform */
+.fade-transform-leave-active,
+.fade-transform-enter-active {
+  transition: all 0.2s;
+}
+.fade-transform-enter-from {
+  opacity: 0;
+  transition: all 0.2s;
+  transform: translateX(-30px);
+}
+.fade-transform-leave-to {
+  opacity: 0;
+  transition: all 0.2s;
+  transform: translateX(30px);
+}
