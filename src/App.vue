@@ -13,7 +13,7 @@ const toggleDark = useToggle(isDark)
 
 mainStore.subject = isDark.value
 
-mittBus.on('toggleDark', ()=>{
+mittBus.on('toggleDark', () => {
     toggleDark()
     mainStore.subject = isDark.value
 })

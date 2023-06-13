@@ -23,7 +23,7 @@ class RequestHttp {
         // 请求拦截器
         this.service.interceptors.request.use(
             (config: any) => {
-                const token: string = main().$state.token
+                const token: string = main().token
                 return {
                     ...config,
                     headers: { ...config.headers, 'x-token': token },
@@ -41,7 +41,7 @@ class RequestHttp {
                 // * 登陆失效
                 if (data.code === ResultEnum.OVERDUE) {
                     ElMessage.error(data.msg)
-                    main().$state.token = '' // 清除token
+                    main().token = '' // 清除token
                     router.replace({ name: 'login' })
                     return Promise.reject(data)
                 }
@@ -66,7 +66,7 @@ class RequestHttp {
                 // 服务器结果都没有返回(可能服务器错误可能客户端断网)，断网处理:可以跳转到断网页面
                 if (!window.navigator.onLine) {
                     // router.replace('/500')
-                    alert('500')
+                    ElMessage.error('500')
                 }
                 return Promise.reject(error)
             },

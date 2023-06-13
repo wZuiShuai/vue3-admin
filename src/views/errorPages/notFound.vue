@@ -1,6 +1,6 @@
 <template>
     <div class="pt7%">
-        <div class="notFound bg-contain bg-right bg-no-repeat mx-auto min-h45 pr205px max-w-170">
+        <div class="notFound mx-auto max-w-170 min-h45 bg-contain bg-right bg-no-repeat pr205px">
             <img class="w14.5" src="@/assets/logo.svg" alt="logo">
             <p>
                 <b>404.</b>

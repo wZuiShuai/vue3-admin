@@ -1,6 +1,11 @@
 <template>
     <el-container class="layoutcontainer full">
-        <el-aside class="!w-auto" style="border-right: 1px solid #e4e7ed;">
+        <el-aside
+            style="border-right: 1px solid #e4e7ed;" 
+            :style="{ width: `${mainStore.menuWidth}px` }"
+            class="z-999 hfull bg-white duration-100"
+            :class="{ fixed: mainStore.isSmallWidth }"
+        >
             <div class="h-full flex flex-col">
                 <div class="h60px flex-center">
                     <img class="w38px object-contain" src="@/assets/logo.svg" alt="logo">
@@ -24,7 +29,8 @@
                 <ToolBar />
             </el-header>
             <Tabs />
-            <el-main>
+            <el-main class="relative">
+                <div v-if="mainStore.isSmallWidth && mainStore.isExpand" class="absolute bottom-0 left-0 right-0 top-0 z-998 bg-black op-30" @click="changeShaadow" />
                 <RouterView v-slot="props">
                     <Transition mode="out-in" name="fade-transform">
                         <!-- 这里缓存二级路由 -->
@@ -59,35 +65,49 @@ const route = useRoute()
 const title: string = import.meta.env.VITE_TITLE
 const menuList = computed(() => authStore.showMenuListGet)
 const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string)
+
+const changeShaadow = () => {
+    mainStore.isExpand = false
+}
+
+// 判断浏览器宽度
+let func: ReturnType<typeof setTimeout> | null 
+window.onresize = () => {
+    if (func) return
+    func = setTimeout(() => {
+        const clientWidth = document.body.clientWidth
+        if (clientWidth < 1000) {
+            mainStore.isSmallWidth = true
+        } else {
+            mainStore.isSmallWidth = false
+        }
+        func = null
+    }, 200)
+}
 </script>
 
 <style lang="scss">
 .layoutcontainer {
     .el-scrollbar {
-        height: calc(100% - 55px)
+        height: calc(100% - 60px);
     }
 
-    .el-scrollbar__view {
+    .el-menu {
         height: 100%;
+        background: transparent;
+    }
 
-        .el-menu {
-            width: 220px;
-            height: 100%;
-            background: transparent;
-        }
+    .el-menu--collapse {
+        width: 54px;
 
-        .el-menu--collapse {
-            width: 54px;
+        li {
 
-            li {
-
-                .el-tooltip__trigger,
-                .el-sub-menu__title {
-                    padding: 0px 15px !important;
-                }
+            .el-tooltip__trigger,
+            .el-sub-menu__title {
+                padding: 0px 15px !important;
             }
-
         }
+
     }
 }
 </style>
